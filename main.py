@@ -13,26 +13,26 @@ model = pickle.load(open('model.pkcls', 'rb'))
 sbert = SBERT()
 corpus = Corpus.from_file("test.csv")
 
-status_code = 0 # 프로그램 상태
+status_code = 0 # program status
 '''
-0 => 아무 상태 아님
-1 => 카메라 실행 중
-2 => 카메라 저장 및 OCR 중
-3 => file 이미지 읽기 및 OCR 중
-4 => 텍스트 입력 중
-5 => 이미지 OCR 수정 중
-6 => 모델 예측 중
-7 => 문제 추천 중
+0 => no state
+1 => Camera running
+2 => Camera saving and OCR
+3 => reading and OCR of file image
+4 => Entering text
+5 => Fixing image OCR
+6 => predicting model
+7 => Recommend problem
 '''
 
 predict_code = {
-    '1.0': '1-1 단원',
-    '2.0': '1-2 단원',
-    '3.0': '1-3 단원',
-    '4.0': '2-1 단원',
-    '5.0': '2-2 단원',
-    '6.0': '3-1 단원',
-    '7.0': '3-2 단원'
+    '1.0': '1-1 part',
+    '2.0': '1-2 part',
+    '3.0': '1-3 part',
+    '4.0': '2-1 part',
+    '5.0': '2-2 part',
+    '6.0': '3-1 part',
+    '7.0': '3-2 part'
 }
 
 
@@ -44,8 +44,8 @@ recommand_data = {i: os.listdir(path+i) for i in dir_list}
 cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 
 def predict(text):
-    # test.csv 파일에 3개 정도는 들어있어야 예측이 가능함.
-    # => 미리 3개 넣어두고 list에 추가함으로써 sbert 인코딩.
+    # The test.csv file must contain at least 3 to be able to predict.
+     # => sbert encoding by putting 3 in advance and adding them to the list.
     data = sbert(texts=corpus.documents + [text], callback=dummy_callback)
     return model(data[-1]) + 1
 
