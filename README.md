@@ -1,5 +1,3 @@
-The README.md file is being written.
-
 # summary
  Based on the physics Ⅰ problem, this program created a predictive natural language processing model with a neuron network model using Orange3. I loaded that model into Python and built the GUI using Tkinter. When you input a problem, it predicts the problem unit through the model and randomly recommends the unit problem prepared in advance.
 
